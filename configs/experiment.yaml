@@ -1,0 +1,54 @@
+random_seed: 42
+
+mongodb:
+  uri: mongodb://127.0.0.1:27017
+  database: AUTO
+
+schema:
+  project: fields.project.key
+  created: fields.created
+  updated: fields.updated
+  resolution: fields.resolutiondate
+  issue_type: fields.issuetype.name
+  priority: fields.priority.name
+  status: fields.status.name
+  summary: fields.summary
+  description: fields.description
+  labels: fields.labels
+  components: fields.components
+  assignee: fields.assignee
+  changelog_histories: changelog.histories
+  comments: fields.comment.comments
+
+selection:
+  min_issues: 1000
+  min_resolved: 500
+  min_unresolved: 50
+  min_censoring_rate: 0.01
+  max_censoring_rate: 0.80
+  max_projects: 12
+  max_projects_per_repository: 3
+
+features:
+  strict_no_leakage: true
+  landmark_days: 7
+
+models:
+  cox:
+    alpha: 0.01
+
+  rsf:
+    n_estimators: 50
+    max_depth: 15
+    min_samples_split: 20
+    min_samples_leaf: 10
+    max_features: sqrt
+    n_jobs: 1
+
+  max_train_rows: 50000
+
+evaluation:
+  horizons_days:
+    - 30
+    - 60
+    - 90

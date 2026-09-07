@@ -21,3 +21,5 @@ ENV/
 Thumbs.db
 
 ThePublicJiraDataset/
+data/
+results/
