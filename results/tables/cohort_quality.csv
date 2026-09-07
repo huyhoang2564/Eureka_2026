@@ -1,0 +1,9 @@
+metric,value
+input_rows,835643.0
+rows_without_created_removed,0.0
+invalid_duration_removed,0.0
+zero_duration_adjusted,21.0
+final_rows,835643.0
+events_resolved,751889.0
+censored_unresolved,83754.0
+censoring_rate,0.1002270108168201

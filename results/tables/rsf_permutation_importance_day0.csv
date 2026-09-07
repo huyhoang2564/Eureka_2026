@@ -1,0 +1,44 @@
+feature,importance_mean,importance_std
+cat__initial_issue_type_Suggestion,0.01812418175135151,0.002584186850106297
+num__initial_assigned,0.007034202277260815,0.0012968091610619016
+num__created_weekday,0.0026733241648184804,0.0009306397326084572
+cat__initial_priority_Blocker,0.0009332680799395088,0.0003404993698916732
+cat__initial_issue_type_Technical task,0.000931254723643593,0.0002817807724981832
+cat__initial_issue_type_Task,0.00024960455617364377,0.0006516908803651044
+cat__initial_priority_Critical,0.0001429999215307065,5.282301048492081e-05
+cat__initial_priority_Medium,0.00010304254273475477,0.00021012184367388183
+cat__initial_priority_Trivial,8.750356209188403e-05,0.00020232070417145322
+cat__initial_priority_ ,0.0,0.0
+cat__initial_priority_Critical - P2,0.0,0.0
+cat__initial_issue_type_Story Task,0.0,0.0
+cat__initial_priority_Low,0.0,0.0
+cat__initial_priority_High,0.0,0.0
+cat__initial_priority_Highest,0.0,0.0
+cat__initial_priority_Blocker - P1,0.0,0.0
+cat__initial_priority_Normal,0.0,0.0
+cat__initial_priority_Minor - P4,0.0,0.0
+cat__initial_priority_Major - P3,0.0,0.0
+cat__initial_issue_type_Feature,0.0,0.0
+cat__initial_issue_type_Epic,0.0,0.0
+cat__initial_issue_type_Build Failure,0.0,0.0
+cat__initial_issue_type_Documentation,0.0,0.0
+cat__initial_issue_type_Fug,0.0,0.0
+cat__initial_priority_Trivial - P5,0.0,0.0
+cat__initial_issue_type_Backport,0.0,0.0
+cat__initial_priority_Unknown,0.0,0.0
+cat__initial_issue_type_Third-party issue,0.0,0.0
+cat__initial_issue_type_Story,0.0,0.0
+cat__initial_issue_type_Question,0.0,0.0
+cat__initial_issue_type_Improvement,0.0,0.0
+cat__initial_issue_type_Public Security Vulnerability,0.0,0.0
+cat__initial_issue_type_New Feature,0.0,0.0
+cat__initial_issue_type_PAIN,0.0,0.0
+cat__initial_issue_type_Problem Ticket,0.0,0.0
+cat__initial_issue_type_Wish,0.0,0.0
+cat__initial_issue_type_Test,0.0,0.0
+cat__initial_issue_type_Support Request,0.0,0.0
+cat__initial_priority_Minor,-0.0011638231880826023,0.000731555801752677
+num__created_hour,-0.001564532715491096,0.0017530558332357132
+cat__initial_issue_type_Sub-task,-0.005215160676157349,0.0009631639138501616
+cat__initial_issue_type_Bug,-0.05351248074405392,0.0035531590266079257
+cat__initial_priority_Major,-0.0913062242651766,0.003709918789791974

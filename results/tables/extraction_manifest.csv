@@ -1,0 +1,13 @@
+repository,project,rows,file,status
+Mojang,MC,213845,d:\VNUK\Eureka 2026\Eureka_2026\data\interim\issues_flat\Mojang__MC.parquet,written
+Qt,QTBUG,97172,d:\VNUK\Eureka 2026\Eureka_2026\data\interim\issues_flat\Qt__QTBUG.parquet,written
+Mojang,MCPE,144778,d:\VNUK\Eureka 2026\Eureka_2026\data\interim\issues_flat\Mojang__MCPE.parquet,written
+Jira,JRASERVER,47225,d:\VNUK\Eureka 2026\Eureka_2026\data\interim\issues_flat\Jira__JRASERVER.parquet,written
+MongoDB,SERVER,58928,d:\VNUK\Eureka 2026\Eureka_2026\data\interim\issues_flat\MongoDB__SERVER.parquet,written
+Jira,CONFSERVER,43910,d:\VNUK\Eureka 2026\Eureka_2026\data\interim\issues_flat\Jira__CONFSERVER.parquet,written
+Sonatype,OSSRH,74960,d:\VNUK\Eureka 2026\Eureka_2026\data\interim\issues_flat\Sonatype__OSSRH.parquet,written
+Sakai,SAK,43351,d:\VNUK\Eureka 2026\Eureka_2026\data\interim\issues_flat\Sakai__SAK.parquet,written
+Apache,HIVE,25731,d:\VNUK\Eureka 2026\Eureka_2026\data\interim\issues_flat\Apache__HIVE.parquet,written
+Jira,JRACLOUD,27916,d:\VNUK\Eureka 2026\Eureka_2026\data\interim\issues_flat\Jira__JRACLOUD.parquet,written
+Apache,FLEX,35390,d:\VNUK\Eureka 2026\Eureka_2026\data\interim\issues_flat\Apache__FLEX.parquet,written
+MariaDB,MDEV,22437,d:\VNUK\Eureka 2026\Eureka_2026\data\interim\issues_flat\MariaDB__MDEV.parquet,written
