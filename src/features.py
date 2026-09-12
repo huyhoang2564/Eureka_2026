@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from typing import Dict, List, Tuple
 import numpy as np
 import pandas as pd
 
@@ -10,8 +9,22 @@ ID_COLS = ["repository", "project", "issue_key"]
 
 def _clean_category(s: pd.Series) -> pd.Series:
     s = s.astype("string").fillna("Unknown")
-    s = s.replace({"<NA>": "Unknown", "None": "Unknown", "nan": "Unknown", "": "Unknown"})
+    s = s.str.strip()
+    s = s.replace({
+        "<NA>": "Unknown",
+        "None": "Unknown",
+        "nan": "Unknown",
+        "": "Unknown",
+    })
     return s
+
+
+def _normalize_priority(s: pd.Series) -> pd.Series:
+    """Chỉ chuẩn hóa các biến thể lexical rõ ràng, ví dụ Blocker - P1 -> Blocker."""
+    out = _clean_category(s)
+    out = out.str.replace(r"\s*-\s*P[1-5]\s*$", "", regex=True)
+    out = out.str.strip().replace({"": "Unknown"})
+    return out
 
 
 def feature_spec(mode: str = "day0", strict_no_leakage: bool = True, landmark_days: int = 7):
@@ -26,8 +39,6 @@ def feature_spec(mode: str = "day0", strict_no_leakage: bool = True, landmark_da
     ]
 
     if not strict_no_leakage:
-        # Chỉ dùng cho sensitivity analysis: các field snapshot có thể thay đổi
-        # sau creation và có nguy cơ leakage.
         numeric += [
             "snapshot_summary_len",
             "snapshot_description_len",
@@ -53,11 +64,16 @@ def feature_spec(mode: str = "day0", strict_no_leakage: bool = True, landmark_da
 def build_day0_table(
     cohort: pd.DataFrame,
     strict_no_leakage: bool = True,
+    normalize_priority_labels: bool = True,
 ) -> pd.DataFrame:
     df = cohort.copy()
 
-    for c in ["initial_priority", "initial_issue_type"]:
-        df[c] = _clean_category(df[c])
+    if normalize_priority_labels:
+        df["initial_priority"] = _normalize_priority(df["initial_priority"])
+    else:
+        df["initial_priority"] = _clean_category(df["initial_priority"])
+
+    df["initial_issue_type"] = _clean_category(df["initial_issue_type"])
 
     numeric, categorical = feature_spec(
         mode="day0",
@@ -71,7 +87,6 @@ def build_day0_table(
     out["event"] = out["event"].astype(bool)
     out["duration_days"] = pd.to_numeric(out["duration_days"], errors="coerce")
     out = out[out["duration_days"].notna() & (out["duration_days"] > 0)].copy()
-
     return out
 
 
@@ -79,17 +94,17 @@ def build_day7_table(
     cohort: pd.DataFrame,
     landmark_days: int = 7,
     strict_no_leakage: bool = True,
+    normalize_priority_labels: bool = True,
 ) -> pd.DataFrame:
-    """
-    Landmark dataset:
-    chỉ issue còn tồn tại tại ngày landmark mới được giữ lại.
-    Target mới = thời gian còn lại sau landmark.
-    """
-    df = cohort[cohort["duration_days"] > landmark_days].copy()
+    df = cohort[cohort["duration_days"] > float(landmark_days)].copy()
     df["duration_days"] = df["duration_days"] - float(landmark_days)
 
-    for c in ["initial_priority", "initial_issue_type"]:
-        df[c] = _clean_category(df[c])
+    if normalize_priority_labels:
+        df["initial_priority"] = _normalize_priority(df["initial_priority"])
+    else:
+        df["initial_priority"] = _clean_category(df["initial_priority"])
+
+    df["initial_issue_type"] = _clean_category(df["initial_issue_type"])
 
     numeric, categorical = feature_spec(
         mode="day7",
@@ -104,7 +119,6 @@ def build_day7_table(
     out["event"] = out["event"].astype(bool)
     out["duration_days"] = pd.to_numeric(out["duration_days"], errors="coerce")
     out = out[out["duration_days"].notna() & (out["duration_days"] > 0)].copy()
-
     return out
 
 
@@ -113,27 +127,36 @@ def sample_training_rows(
     max_rows: int | None,
     random_state: int = 42,
 ) -> pd.DataFrame:
-    if max_rows is None or len(df) <= max_rows:
+    """Lấy mẫu gần cân bằng theo repository+project, không làm sai index gốc."""
+    if max_rows is None or len(df) <= int(max_rows):
         return df.copy()
 
-    # Lấy mẫu gần cân bằng theo project để project khổng lồ không nuốt hết train set.
-    groups = list(df.groupby("project", sort=False))
-    per_group = max(1, max_rows // max(1, len(groups)))
-    chunks = []
+    max_rows = int(max_rows)
+    work = df.copy()
+    work["__row_id__"] = np.arange(len(work), dtype=np.int64)
 
-    for _, g in groups:
+    group_cols = ["repository", "project"] if {"repository", "project"}.issubset(work.columns) else ["project"]
+    grouped = list(work.groupby(group_cols, sort=False, dropna=False))
+    per_group = max(1, max_rows // max(1, len(grouped)))
+
+    chunks = []
+    selected_ids = set()
+
+    for i, (_, g) in enumerate(grouped):
         n = min(len(g), per_group)
-        chunks.append(g.sample(n=n, random_state=random_state))
+        sampled = g.sample(n=n, random_state=random_state + i)
+        chunks.append(sampled)
+        selected_ids.update(sampled["__row_id__"].tolist())
 
     out = pd.concat(chunks, ignore_index=True)
 
     if len(out) < max_rows:
-        remaining = df.loc[~df.index.isin(out.index)]
+        remaining = work[~work["__row_id__"].isin(selected_ids)]
         if len(remaining):
             extra = remaining.sample(
                 n=min(max_rows - len(out), len(remaining)),
-                random_state=random_state,
+                random_state=random_state + 10000,
             )
             out = pd.concat([out, extra], ignore_index=True)
 
-    return out.head(max_rows).copy()
+    return out.head(max_rows).drop(columns=["__row_id__"], errors="ignore").copy()

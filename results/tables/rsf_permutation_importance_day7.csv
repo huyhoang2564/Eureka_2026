@@ -1,0 +1,50 @@
+feature,importance_mean,importance_std
+num__status_changes_7d,0.032994151940719085,0.004812655624858205
+cat__initial_issue_type_Suggestion,0.009076450990905349,0.0007132866262866223
+num__assignee_changes_7d,0.008404133883036513,0.0014341753064948915
+num__inactivity_days_at_7d,0.004680884588397017,0.0018761591807840738
+num__initial_assigned,0.004468624634850515,0.002619824906471461
+cat__initial_priority_Unknown,0.0009748087960071317,0.0005695674747646284
+cat__initial_issue_type_Sub-task,0.000964096611435572,0.000375588299925426
+num__priority_changes_7d,0.000514128181207063,4.3540683351461876e-05
+num__created_weekday,0.0004603972236737697,0.000872453236275997
+cat__initial_priority_High,0.0,0.0
+cat__initial_priority_Highest,0.0,0.0
+cat__initial_priority_Complex Fast-Track,0.0,0.0
+cat__initial_priority_Critical,0.0,0.0
+cat__initial_priority_Low,0.0,0.0
+num__comments_7d,0.0,0.0
+cat__initial_priority_Blocker,0.0,0.0
+cat__initial_priority_ ,0.0,0.0
+cat__initial_issue_type_Sub-Task,0.0,0.0
+cat__initial_issue_type_Support Request,0.0,0.0
+cat__initial_issue_type_Third-party issue,0.0,0.0
+cat__initial_priority_Medium,0.0,0.0
+cat__initial_priority_Trivial,0.0,0.0
+cat__initial_issue_type_Atlassian Task,0.0,0.0
+cat__initial_priority_Normal,0.0,0.0
+cat__initial_priority_Minor,0.0,0.0
+cat__initial_issue_type_Fug,0.0,0.0
+cat__initial_issue_type_Epic,0.0,0.0
+cat__initial_issue_type_Feature,0.0,0.0
+cat__initial_issue_type_Feedback,0.0,0.0
+cat__initial_issue_type_New Project,0.0,0.0
+cat__initial_issue_type_Publishing Support,0.0,0.0
+cat__initial_issue_type_Customer Problem,0.0,0.0
+cat__initial_issue_type_Documentation,0.0,0.0
+cat__initial_issue_type_User Story,0.0,0.0
+cat__initial_issue_type_Wish,0.0,0.0
+cat__initial_issue_type_Test,0.0,0.0
+cat__initial_issue_type_Problem,0.0,0.0
+cat__initial_issue_type_Question,0.0,0.0
+cat__initial_issue_type_Request,0.0,0.0
+cat__initial_issue_type_Story,0.0,0.0
+cat__initial_issue_type_Public Security Vulnerability,0.0,0.0
+cat__initial_issue_type_New Feature,-2.5051775558804225e-05,0.0003167610369802237
+num__created_hour,-0.0001051381078314817,0.0003274739644454066
+cat__initial_priority_Major,-0.00013478081963518295,0.0001253436868970111
+cat__initial_issue_type_Technical task,-0.0002052885318412967,0.0001454469279130178
+cat__initial_issue_type_Improvement,-0.00021577400351182607,0.0009738989048253346
+cat__initial_issue_type_Task,-0.0008677436285173367,0.0004768849759487882
+num__changes_7d,-0.0011889958092120567,0.0011735115548089298
+cat__initial_issue_type_Bug,-0.004061561621133314,0.0010680093212620781

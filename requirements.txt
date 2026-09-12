@@ -71,3 +71,5 @@ uvicorn==0.52.4
 watchdog==6.0.0
 websockets==16.1.1
 wrapt==2.3.0
+survshap==0.4.2
+shap<=0.45.0

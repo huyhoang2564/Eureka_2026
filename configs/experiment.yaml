@@ -32,23 +32,43 @@ selection:
 features:
   strict_no_leakage: true
   landmark_days: 7
+  normalize_priority_labels: true
 
 models:
   cox:
-    alpha: 0.01
+    alpha: 0.10
 
   rsf:
-    n_estimators: 50
-    max_depth: 15
-    min_samples_split: 20
-    min_samples_leaf: 10
+    n_estimators: 150
+    max_depth: 8
+    min_samples_split: 100
+    min_samples_leaf: 50
     max_features: sqrt
-    n_jobs: 1
+    n_jobs: -1
 
   max_train_rows: 50000
 
 evaluation:
+  modes:
+    - day0
+    - day7
+
   horizons_days:
     - 30
     - 60
     - 90
+
+  max_ibs_rows: 2000
+  survival_batch_size: 16
+
+cross_project:
+  fast_mode: false
+  smoke_folds: 3
+  resume: true
+  force_rerun: false
+
+xai:
+  permutation_rows: 2000
+  permutation_repeats: 5
+  survshap_background_rows: 25
+  candidate_rows: 200
